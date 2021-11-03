@@ -42,9 +42,11 @@ Setup Github SSH
 
     # add public key to Github
 
-Install Github Desktop.
+For nice visual Git diffs, there are many options:
 
-For nice visual Git diffs, install Github Desktop and the command line tool so you can run `github .` in any repository. _I've been using `gitx` for years (http://rowanj.github.io/gitx/) for this as a fast Git staging though giving Github Desktop a try._
+- Install Github Desktop and the command line tool so you can run `github .` in any repository.
+- _I've been using `gitx` for years (http://rowanj.github.io/gitx/) for this as a fast way to view/stage Git commits though giving Github Desktop a try._
+- Use VSCode's tools
 
 Install Homebrew
 
