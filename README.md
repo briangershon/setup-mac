@@ -27,7 +27,9 @@ Install Docker.
 
 Switch macOS shell to bash: Open Terminal and then run `chsh -s /bin/bash` then restart Terminal.
 
-Install Microsoft Visual Code, and extensions:
+Install Microsoft Visual Code, and extensions/configure:
+
+- `command-shift-p` and run `Shell Command: Install 'code' command in PATH`
 
 - `Prettier - Code formatter` (by Esben Petersen) and then update these settings: Set `Editor: Default Formatter` to `esbenp.prettier-vscode`.
 
@@ -39,6 +41,10 @@ Setup Github SSH
     ssh-keygen -t rsa -b 4096 -C "<desired email address here>"
 
     # add public key to Github
+
+Install Github Desktop.
+
+For nice visual Git diffs, install Github Desktop and the command line tool so you can run `github .` in any repository. _I've been using `gitx` for years (http://rowanj.github.io/gitx/) for this as a fast Git staging though giving Github Desktop a try._
 
 Install Homebrew
 
@@ -52,26 +58,32 @@ Install apps via Homebrew:
 
     brew install pwgen tmux git bash-completion gh
 
-Install `nvm`: https://github.com/creationix/nvm#install-script then latest NodeJS LTS
+Install latest NodeJS via `nvm` by running:
+
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+... and install latest version:
+
+    nvm ls-remote
+    nvm install v16
+    nvm alias default v16
 
 Install Go: https://github.com/briangershon/setup-go
 
 ## Configuration
 
-Configure Git name and email (this now happens when dot files are symlinked below)
-
-    git config --global user.name "Brian Gershon"
-    git config --global user.email "briangershon@users.noreply.github.com"
-
-For nice visual Git diffs, I like to use gitx (download from <http://rowanj.github.io/gitx/> and run "GitX > Enable Terminal Usage") and launch it from the commandline in whichever repo directory I'm in.
+Configure Git name and email via setting up `.gitconfig` link below.
 
 Clone this repo locally via `git clone git@github.com:briangershon/setup-mac.git`
 
 Setup .dot config files
 
+    # if files already exist merge/remove before linking
+
     cd ~
+    ln -s ~/setup-mac/dotfiles/.gitconfig
     ln -s ~/setup-mac/dotfiles/.bash_profile
     ln -s ~/setup-mac/dotfiles/.tmux.conf
-    ln -s ~/setup-mac/dotfiles/.gitconfig
+    # also for tmux, change MacOS keyboard shortcut so that CAPS LOCK maps to CTRL in "System Preferences > Keyboard" then "Modifier Keys..." button
 
     # private repo for .ssh/config
