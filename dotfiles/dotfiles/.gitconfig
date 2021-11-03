@@ -1,0 +1,27 @@
+[user]
+	name = Brian Gershon
+	email = briangershon@users.noreply.github.com
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+
+[push]
+  default = simple
+
+[alias]
+  st = status
+  ci = commit
+  br = branch
+  co = checkout
+  df = difftool --tool meld --dir-diff
+  lp = log -p
+  me = config user.name
+  bn = !git for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(authorname) %(refname:short)' | sed 10q
+  bn-all = !git for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(authorname) %(refname:short)'
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+  all = !git log --all
+  today = !git all --since='12am' --committer=\"`git me`\"
+  today-all = !git all --since='12am'
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  remove-merged = !git branch --merged | grep -v \"\\* master\" | xargs -n 1 git branch -d
+  prune-stale = remote prune origin
