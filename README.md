@@ -1,6 +1,6 @@
 # setup-mac
 
-My personal setup and configuration for a MacOS machine.
+My personal configuration for MacOS machines.
 
 ## Setup MacOS Machine
 
@@ -86,6 +86,5 @@ Setup .dot config files
     ln -s ~/setup-mac/dotfiles/.gitconfig
     ln -s ~/setup-mac/dotfiles/.bash_profile
     ln -s ~/setup-mac/dotfiles/.tmux.conf
-    # also for tmux, change MacOS keyboard shortcut so that CAPS LOCK maps to CTRL in "System Preferences > Keyboard" then "Modifier Keys..." button
 
-    # private repo for .ssh/config
+Also for `tmux` change MacOS keyboard shortcut so that CAPS LOCK maps to CTRL in "System Preferences > Keyboard" then "Modifier Keys..." button. This gives you the very nice `CAPSLOCK-a` (already setup in `.tmux.conf` instead of default `CTRL-b`.
