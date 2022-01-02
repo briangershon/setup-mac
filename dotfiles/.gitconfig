@@ -31,3 +31,5 @@
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
   remove-merged = !git branch --merged | grep -v \"\\* master\" | xargs -n 1 git branch -d
   prune-stale = remote prune origin
+[init]
+	defaultBranch = main
