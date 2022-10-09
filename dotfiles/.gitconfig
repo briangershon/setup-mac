@@ -1,35 +1,35 @@
 [user]
-	name = Brian Gershon
-	email = briangershon@users.noreply.github.com
+  name = Brian Gershon
+  email = briangershon@users.noreply.github.com
   signingkey = C04296150767D5F0
 
 [commit]
-	gpgsign = true
+  gpgsign = true
 
 # [url "git@github.com:"]
-# 	insteadOf = https://github.com/
+#   insteadOf = https://github.com/
 
 [pull]
-	ff = only
-	rebase = true
+  ff = only
+  rebase = true
 
 [push]
   default = simple
 
 [fetch]
-	prune = true
+  prune = true
 
 [merge]
-	ff = false
+  ff = false
 
 [grep]
-	lineNumber = true
+  lineNumber = true
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
 
 # This next lines include Netlify's Git Credential Helper configuration in your Git configuration.
 [include]
@@ -55,4 +55,4 @@
   prune-stale = remote prune origin
 
 [init]
-	defaultBranch = main
+  defaultBranch = main

@@ -6,18 +6,17 @@ My personal configuration for MacOS machines.
 
 Update Computer name via `System Preferences > Sharing`.
 
-Install Chrome and Firefox browsers. Login on each to sync bookmarks.
+Install Brave Browser. Setup various profiles.
 
 In Mac App Store, install Desktop apps:
 
-- Slack
 - 1Password
-- Divvy
 
 Install additional Desktop apps:
 
-- Discord
 - Dropbox
+- Discord
+- Slack
 
 ## Setup Developer Tools
 
@@ -44,9 +43,9 @@ Setup Github SSH
 
 For nice visual Git diffs, there are many options:
 
-- Install Github Desktop and the command line tool so you can run `github .` in any repository.
-- _I've been using `gitx` for years (http://rowanj.github.io/gitx/) for this as a fast way to view/stage Git commits though giving Github Desktop a try._
 - Use VSCode's tools
+- Use `difft`, a Rust-based diff tool installed via Homebrew (below)
+- Install Github Desktop and the command line tool so you can run `github .` in any repository.
 
 Install Homebrew
 
@@ -58,9 +57,9 @@ If homebrew needs to be accessible for multiple user accounts on same machine: <
 
 Install apps via Homebrew:
 
-    brew install pwgen tmux git bash-completion gh
+    brew install pwgen tmux git bash-completion gh difft
 
-Install latest NodeJS via `nvm` by running:
+Install `nvm` to install NodeJS:
 
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 
@@ -72,9 +71,7 @@ Install latest NodeJS via `nvm` by running:
 
 Install Go: https://github.com/briangershon/setup-go
 
-## Configuration
-
-Configure Git name and email via setting up `.gitconfig` link below.
+## Clone setup-mac and link up config files
 
 Clone this repo locally via `git clone git@github.com:briangershon/setup-mac.git`
 
@@ -88,3 +85,11 @@ Setup .dot config files
     ln -s ~/setup-mac/dotfiles/.tmux.conf
 
 Also for `tmux` change MacOS keyboard shortcut so that CAPS LOCK maps to CTRL in "System Preferences > Keyboard" then "Modifier Keys..." button. This gives you the very nice `CAPSLOCK-a` (already setup in `.tmux.conf` instead of default `CTRL-b`.
+
+## Additional Configuration
+
+### Git configuration
+
+Setup gpg for signed GitHub commits: https://gist.github.com/Beneboe/3183a8a9eb53439dbee07c90b344c77e
+
+Import keys for signing key `C04296150767D5F0`
