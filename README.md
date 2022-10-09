@@ -44,7 +44,7 @@ Setup Github SSH
 For nice visual Git diffs, there are many options:
 
 - Use VSCode's tools
-- Use `difft`, a Rust-based diff tool installed via Homebrew (below)
+- Install `difftastic`, a Rust-based diff tool installed via Homebrew below. Run as `difft`.
 - Install Github Desktop and the command line tool so you can run `github .` in any repository.
 
 Install Homebrew
@@ -57,7 +57,7 @@ If homebrew needs to be accessible for multiple user accounts on same machine: <
 
 Install apps via Homebrew:
 
-    brew install pwgen tmux git bash-completion gh difft
+    brew install pwgen tmux git bash-completion gh difftastic gpg
 
 Install `nvm` to install NodeJS:
 
@@ -90,6 +90,12 @@ Also for `tmux` change MacOS keyboard shortcut so that CAPS LOCK maps to CTRL in
 
 ### Git configuration
 
-Setup gpg for signed GitHub commits: https://gist.github.com/Beneboe/3183a8a9eb53439dbee07c90b344c77e
+Import your public/secret key for signing GitHub commits.
 
-Import keys for signing key `C04296150767D5F0`
+```bash
+gpg --import ~/public-key.gpg
+gpg --allow-secret-key-import --import ~/secret-key.gpg
+gpg --list-keys
+```
+
+For first-time setup, generate brand new keypair with `gpg`: https://gist.github.com/Beneboe/3183a8a9eb53439dbee07c90b344c77e
