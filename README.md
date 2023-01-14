@@ -6,33 +6,44 @@ My personal configuration for MacOS machines.
 
 Update Computer name via `System Preferences > Sharing`.
 
-Install Brave Browser. Setup various profiles.
+Install Desktop apps:
 
-In Mac App Store, install Desktop apps:
-
-- 1Password
-
-Install additional Desktop apps:
-
+- Install 1Password.
+- Install Brave Browser. Setup various profiles.
 - Dropbox
 - Discord
+
+In Mac App Store, install:
+
 - Slack
 
 ## Setup Developer Tools
 
 Install iTerm2.
 
-Install Docker.
+Install Docker Desktop.
 
 Switch macOS shell to bash: Open Terminal and then run `chsh -s /bin/bash` then restart Terminal.
 
-Install Microsoft Visual Code, and extensions/configure:
+Install Microsoft Visual Code extensions:
 
 - `command-shift-p` and run `Shell Command: Install 'code' command in PATH`
 
-- `Prettier - Code formatter` (by Esben Petersen) and then update these settings: Set `Editor: Default Formatter` to `esbenp.prettier-vscode`.
+- `Prettier - Code formatter` by Prettier
 
-Setup Github SSH
+  - update Settings for `Editor: Default Formatter` to `Prettier - Code formatter`.
+
+- `Dev Containers` by Microsoft
+
+- `Solidity` by Nomic Foundation
+
+- `Tailwind CSS` by Tailwind Labs
+
+- `GitHub Codespaces` by GitHub
+
+- `Docker` by Microsoft
+
+Setup Passwordless Auth to Github via SSH
 
     ssh-keygen -t ed25519 -C "<desired email address here>"
 
@@ -57,7 +68,7 @@ If homebrew needs to be accessible for multiple user accounts on same machine: <
 
 Install apps via Homebrew:
 
-    brew install pwgen tmux git bash-completion gh difftastic gpg
+    brew install tmux git bash-completion gh difftastic gpg
 
 Install `nvm` to install NodeJS:
 
@@ -66,8 +77,8 @@ Install `nvm` to install NodeJS:
 ... and install latest version:
 
     nvm ls-remote
-    nvm install v16
-    nvm alias default v16
+    nvm install v18
+    nvm alias default v18
 
 Install Go: https://github.com/briangershon/setup-go
 
@@ -83,6 +94,8 @@ Setup .dot config files
     ln -s ~/setup-mac/dotfiles/.gitconfig
     ln -s ~/setup-mac/dotfiles/.bash_profile
     ln -s ~/setup-mac/dotfiles/.tmux.conf
+
+    rm ~/.profile
 
 Also for `tmux` change MacOS keyboard shortcut so that CAPS LOCK maps to CTRL in "System Preferences > Keyboard" then "Modifier Keys..." button. This gives you the very nice `CAPSLOCK-a` (already setup in `.tmux.conf` instead of default `CTRL-b`.
 
