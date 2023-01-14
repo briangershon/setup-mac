@@ -68,7 +68,7 @@ If homebrew needs to be accessible for multiple user accounts on same machine: <
 
 Install apps via Homebrew:
 
-    brew install tmux git bash-completion gh difftastic gpg
+    brew install tmux git bash-completion gh difftastic gpg git-lfs
 
 Install `nvm` to install NodeJS:
 
