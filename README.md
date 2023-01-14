@@ -23,6 +23,10 @@ Install iTerm2.
 
 Install Docker Desktop.
 
+- for Apple Silicon (M1) machines you may need one of these when working with non-ARM containers:
+  - `export DOCKER_DEFAULT_PLATFORM=linux/amd64` to build containers on AMD/64 instead of default ARM/64.
+  - `softwareupdate --install-rosetta` to run Intel containers
+
 Switch macOS shell to bash: Open Terminal and then run `chsh -s /bin/bash` then restart Terminal.
 
 Install Microsoft Visual Code extensions:
