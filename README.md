@@ -33,7 +33,7 @@ If homebrew needs to be accessible for multiple user accounts on same machine: <
 Install apps via Homebrew:
 
 ```bash
-brew install tmux git bash-completion gh gpg git-lfs
+brew install tmux git bash-completion gh gpg git-lfs starship hx neovim
 ```
 
 ### Shell and Terminal
@@ -60,9 +60,32 @@ For Apple Silicon machines you may need one of these when working with non-ARM c
   - `export DOCKER_DEFAULT_PLATFORM=linux/amd64` to build containers on AMD/64 instead of default ARM/64.
   - `softwareupdate --install-rosetta` to run Intel containers
 
+
+### Clone setup-mac and link up config files
+
+Clone this repo locally via `git clone git@github.com:briangershon/setup-mac.git`
+
+### Setup .dot config files
+
+    # if files already exist merge/remove before linking
+
+    cd ~
+    ln -s ~/setup-mac/dotfiles/gitconfig .gitconfig
+    ln -s ~/setup-mac/dotfiles/bash_profile .bash_profile
+    ln -s ~/setup-mac/dotfiles/tmux.conf .tmux.conf
+    ln -s ~/setup-mac/dotfiles/config/helix .config/helix
+    ln -s ~/setup-mac/dotfiles/config/nvim .config/nvim
+    ln -s ~/setup-mac/dotfiles/config/starship .config/starship
+
+    rm ~/.profile
+
+### tmux
+
+Also for `tmux` change MacOS keyboard shortcut so that CAPS LOCK maps to CTRL in "System Preferences > Keyboard" then "Modifier Keys..." button. This gives you the very nice `CAPSLOCK-a` (already setup in `.tmux.conf` instead of default `CTRL-b`.
+
 ### Editor
 
-NeoVim or Helix.
+Helix and NeoVim.
 
 ### Setup Git
 
@@ -91,23 +114,6 @@ Install `nvm` to install NodeJS:
 
 ### Install Go
 https://github.com/briangershon/setup-go
-
-## Clone setup-mac and link up config files
-
-Clone this repo locally via `git clone git@github.com:briangershon/setup-mac.git`
-
-Setup .dot config files
-
-    # if files already exist merge/remove before linking
-
-    cd ~
-    ln -s ~/setup-mac/dotfiles/.gitconfig
-    ln -s ~/setup-mac/dotfiles/.bash_profile
-    ln -s ~/setup-mac/dotfiles/.tmux.conf
-
-    rm ~/.profile
-
-Also for `tmux` change MacOS keyboard shortcut so that CAPS LOCK maps to CTRL in "System Preferences > Keyboard" then "Modifier Keys..." button. This gives you the very nice `CAPSLOCK-a` (already setup in `.tmux.conf` instead of default `CTRL-b`.
 
 ## Additional Configuration
 
