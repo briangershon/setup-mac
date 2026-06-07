@@ -31,10 +31,6 @@
   process = git-lfs filter-process
   required = true
 
-# This next lines include Netlify's Git Credential Helper configuration in your Git configuration.
-[include]
-  path = /Users/brian/Library/Preferences/netlify/helper/git-config
-
 [alias]
   st = status
   ci = commit
@@ -43,7 +39,7 @@
   df = difftool --tool meld --dir-diff
   lp = log -p
   me = config user.name
-  bn = !git for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(authorname) %(refname:short)' | sed 10q
+  bn = !git for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(authorname) %(refname:short)' | sed 8q
   bn-all = !git for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(authorname) %(refname:short)'
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   all = !git log --all
@@ -56,3 +52,9 @@
 
 [init]
   defaultBranch = main
+
+# this tells git to only check file size and mode (not mtime/inode), which is stable across the Docker bind mount boundary
+[core]
+	checkStat = minimal
+[gpg]
+	program = /opt/homebrew/bin/gpg
