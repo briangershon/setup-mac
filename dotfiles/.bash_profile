@@ -11,3 +11,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+. "$HOME/.cargo/env"
+export PATH="$PATH:/Users/brian/.local/bin"
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+eval "$(starship init bash)"
