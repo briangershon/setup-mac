@@ -2,77 +2,82 @@
 
 My personal configuration for MacOS machines.
 
-## Setup MacOS Machine
+## Setup MacOS and Desktop Apps
 
 Update Computer name via `System Preferences > Sharing`.
 
 Install Desktop apps:
 
-- Install 1Password.
-- Install Brave Browser. Setup various profiles.
+- Install 1Password
+- Install Brave Browser and setup various profiles
 - Dropbox
 - Discord
 
 In Mac App Store, install:
 
 - Slack
+- Telegram
+- Coin Tick menubar app
 
 ## Setup Developer Tools
 
-Install iTerm2.
+### Install Homebrew
 
-Install Docker Desktop.
-
-- for Apple Silicon (M1) machines you may need one of these when working with non-ARM containers:
-  - `export DOCKER_DEFAULT_PLATFORM=linux/amd64` to build containers on AMD/64 instead of default ARM/64.
-  - `softwareupdate --install-rosetta` to run Intel containers
-
-Switch macOS shell to bash: Open Terminal and then run `chsh -s /bin/bash` then restart Terminal.
-
-Install Microsoft Visual Code extensions:
-
-- `command-shift-p` and run `Shell Command: Install 'code' command in PATH`
-
-- `Prettier - Code formatter` by Prettier
-
-  - update Settings for `Editor: Default Formatter` to `Prettier - Code formatter`.
-
-- `Dev Containers` by Microsoft
-
-- `Solidity` by Nomic Foundation
-
-- `Tailwind CSS` by Tailwind Labs
-
-- `GitHub Codespaces` by GitHub
-
-- `Docker` by Microsoft
-
-Setup Passwordless Auth to Github via SSH
-
-    ssh-keygen -t ed25519 -C "<desired email address here>"
-
-    # legacy version
-    ssh-keygen -t rsa -b 4096 -C "<desired email address here>"
-
-    # add public key to Github
-
-For nice visual Git diffs, there are many options:
-
-- Use VSCode's tools
-- Install `difftastic`, a Rust-based diff tool installed via Homebrew below. Run as `difft`.
-- Install Github Desktop and the command line tool so you can run `github .` in any repository.
-
-Install Homebrew
-
-    xcode-select --install
-
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```bash
+xcode-select --install
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```
 
 If homebrew needs to be accessible for multiple user accounts on same machine: <https://medium.com/@leifhanack/homebrew-multi-user-setup-e10cb5849d59>
 
 Install apps via Homebrew:
 
-    brew install tmux git bash-completion gh difftastic gpg git-lfs yarn
+```bash
+brew install tmux git bash-completion gh gpg git-lfs
+```
+
+### Shell and Terminal
+
+1. Install latest bash
+
+```bash
+brew install bash
+sudo sh -c 'echo /opt/homebrew/bin/bash >> /etc/shells'
+chsh -s /opt/homebrew/bin/bash
+bash --version   # should show 5.x
+type mapfile     # should show "mapfile is a shell builtin"
+```
+
+2. Restart system.
+
+3. Install ghostty terminal.
+
+### Docker
+
+Install Docker Desktop.
+
+For Apple Silicon machines you may need one of these when working with non-ARM containers:
+  - `export DOCKER_DEFAULT_PLATFORM=linux/amd64` to build containers on AMD/64 instead of default ARM/64.
+  - `softwareupdate --install-rosetta` to run Intel containers
+
+### Editor
+
+NeoVim or Helix.
+
+### Setup Git
+
+Setup passwordless Auth to Github via SSH
+
+```bash
+ssh-keygen -t ed25519 -C "<desired email address here>"
+
+# legacy version
+ssh-keygen -t rsa -b 4096 -C "<desired email address here>"
+
+ # add public key to Github
+```
+
+### Setup Node.js
 
 Install `nvm` to install NodeJS:
 
@@ -84,7 +89,8 @@ Install `nvm` to install NodeJS:
     nvm install v18
     nvm alias default v18
 
-Install Go: https://github.com/briangershon/setup-go
+### Install Go
+https://github.com/briangershon/setup-go
 
 ## Clone setup-mac and link up config files
 
