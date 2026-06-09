@@ -1,0 +1,9 @@
+term = xterm-256color
+font-family = TX-02
+font-size = 16
+theme = 0x96f
+background = #2A2C3E
+confirm-close-surface=false
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+#keybind = shift+enter=text:\x1b\r
+
