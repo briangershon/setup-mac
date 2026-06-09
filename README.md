@@ -87,6 +87,13 @@ Also for `tmux` change MacOS keyboard shortcut so that CAPS LOCK maps to CTRL in
 
 Helix and NeoVim.
 
+Why Helix? <https://phaazon.net/blog/more-hindsight-vim-helix-kakoune>
+
+#### Helix Setup
+
+For Helix, setup these dependencies:
+- To support TypeScript LSP options: `npm i -g typescript typescript-language-server`
+
 ### Setup Git
 
 Setup passwordless Auth to Github via SSH
