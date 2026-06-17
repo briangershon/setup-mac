@@ -35,6 +35,7 @@ require 'plugins.oil'
 require 'plugins.lualine'
 require 'plugins.treesitter'
 require 'plugins.telescope'
+require 'plugins.blink'
 require 'plugins.lsp'
 require 'plugins.conform'
 

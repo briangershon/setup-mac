@@ -184,6 +184,10 @@ do
     gh 'WhoIsSethDaniel/mason-tool-installer.nvim',
   }
 
+  -- Merge blink.cmp's LSP capabilities into every server so completion
+  -- sources (snippets, additional text edits, etc.) work correctly.
+  vim.lsp.config('*', { capabilities = require('blink.cmp').get_lsp_capabilities() })
+
   -- Automatically install LSPs and related tools to stdpath for Neovim
   require('mason').setup {}
 
