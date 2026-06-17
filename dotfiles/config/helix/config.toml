@@ -1,5 +1,6 @@
 #theme = "everblush"
-theme = "monokai"
+#theme = "monokai"
+theme = "gruvbox_light_soft"
 
 [editor]
 scroll-lines = 1
@@ -31,7 +32,9 @@ display-inlay-hints = true
 [editor.statusline]
 left = ["mode", "spinner", "file-name", "file-type", "total-line-numbers", "file-encoding"]
 center = []
-right = ["selections", "primary-selection-length", "position", "position-percentage", "spacer", "diagnostics", "workspace-diagnostics", "version-control"]
+# problem when version control branch name too long
+#right = ["selections", "primary-selection-length", "position", "position-percentage", "spacer", "diagnostics", "workspace-diagnostics", "version-control"]
+right = ["selections", "primary-selection-length", "position", "position-percentage", "spacer", "diagnostics", "workspace-diagnostics"]
 
 [keys.normal]
 "^" = "goto_line_start"
