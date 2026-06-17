@@ -12,11 +12,11 @@ vim.pack.add({
   "https://github.com/MunifTanjim/nui.nvim",
   "https://github.com/nvim-tree/nvim-web-devicons",
   "https://github.com/nvim-mini/mini.nvim",
-  -- "https://github.com/stevearc/oil.nvim",
+  "https://github.com/stevearc/oil.nvim",
   -- "https://github.com/moll/vim-bbye", -- used by bufferline
   -- "https://github.com/akinsho/bufferline.nvim",
   "https://github.com/nvim-lualine/lualine.nvim",
-  -- "nvim-treesitter/nvim-treesitter-textobjects",
+  "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
   "https://github.com/nvim-treesitter/nvim-treesitter",
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
@@ -30,10 +30,11 @@ vim.pack.add({
 
 require 'plugins.colortheme'
 require 'plugins.neo-tree'
--- require 'plugins.oil'
+require 'plugins.oil'
 -- require 'plugins.bufferline'
 require 'plugins.lualine'
 require 'plugins.treesitter'
 require 'plugins.telescope'
 require 'plugins.lsp'
+require 'plugins.conform'
 

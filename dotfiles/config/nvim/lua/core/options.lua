@@ -9,6 +9,11 @@ vim.o.smartcase = true -- smart case
 vim.wo.signcolumn = 'yes' -- Keep signcolumn on by default
 vim.o.updatetime = 250 -- Decrease update time
 vim.o.timeoutlen = 300 -- time to wait for a mapped sequence to complete (in milliseconds)
+vim.opt.autoread = true -- auto reload files changed outside of Neovim
+vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter' }, {
+  desc = 'Check for file changes on disk',
+  command = 'checktime',
+})
 vim.o.backup = false -- creates a backup file
 vim.o.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 vim.o.completeopt = 'menuone,noselect' -- Set completeopt to have a better completion experience
