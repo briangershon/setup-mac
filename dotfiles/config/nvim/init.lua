@@ -19,6 +19,9 @@ vim.pack.add({
 	"https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
 	"https://github.com/nvim-treesitter/nvim-treesitter",
 	"https://github.com/lewis6991/gitsigns.nvim",
+	"https://github.com/sindrets/diffview.nvim",
+	"https://github.com/folke/trouble.nvim",
+	"https://github.com/folke/which-key.nvim",
 
 	-- Fuzzy Finder Algorithm which requires local dependencies to be built.
 	-- Only load if `make` is available. Make sure you have the system
@@ -39,6 +42,10 @@ require("plugins.blink")
 require("plugins.lsp")
 require("plugins.conform")
 require("plugins.gitsigns")
+require("plugins.diffview")
+require("plugins.trouble")
+require("plugins.whichkey")
+require("plugins.review")
 
 vim.api.nvim_create_user_command("GitChangedStaging", function()
 	vim.cmd("args `git diff --name-only origin/staging...HEAD`")

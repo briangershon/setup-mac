@@ -90,6 +90,7 @@ Also for `tmux` change MacOS keyboard shortcut so that CAPS LOCK maps to CTRL in
   - iTerm2 requires setting up in `Settings > Profiles > Text` in "Use a different font for non-ASCII text" section.
 - To support TypeScript LSP options: `npm i -g typescript typescript-language-server`
 - Install NeoVim
+- Press `<leader>r` in NeoVim to bring up the which-key popup listing all review keymaps (diff view, hunk navigation, diagnostics, references, search, etc.) — see `dotfiles/config/nvim/lua/plugins/review.lua`.
 
 Other:
 
