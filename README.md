@@ -57,9 +57,9 @@ type mapfile     # should show "mapfile is a shell builtin"
 Install Docker Desktop.
 
 For Apple Silicon machines you may need one of these when working with non-ARM containers:
-  - `export DOCKER_DEFAULT_PLATFORM=linux/amd64` to build containers on AMD/64 instead of default ARM/64.
-  - `softwareupdate --install-rosetta` to run Intel containers
 
+- `export DOCKER_DEFAULT_PLATFORM=linux/amd64` to build containers on AMD/64 instead of default ARM/64.
+- `softwareupdate --install-rosetta` to run Intel containers
 
 ### Clone setup-mac and link up config files
 
@@ -83,16 +83,17 @@ Clone this repo locally via `git clone git@github.com:briangershon/setup-mac.git
 
 Also for `tmux` change MacOS keyboard shortcut so that CAPS LOCK maps to CTRL in "System Preferences > Keyboard" then "Modifier Keys..." button. This gives you the very nice `CAPSLOCK-a` (already setup in `.tmux.conf` instead of default `CTRL-b`.
 
-### Editor
+### Editors
 
-Helix and NeoVim.
-
-Why Helix? <https://phaazon.net/blog/more-hindsight-vim-helix-kakoune>
-
-#### Helix Setup
-
-For Helix, setup these dependencies:
+- Setup Nerd Fonts via `brew install font-jetbrains-mono-nerd-font`
+  - Ghostty supports fall-back fonts as well, so nerd font is optional
+  - iTerm2 requires setting up in `Settings > Profiles > Text` in "Use a different font for non-ASCII text" section.
 - To support TypeScript LSP options: `npm i -g typescript typescript-language-server`
+- Install NeoVim
+
+Other:
+
+- Helix is interesting too. Common features built-in and intentionally no plug-in system. Why Helix? <https://phaazon.net/blog/more-hindsight-vim-helix-kakoune>
 
 ### Setup Git
 
@@ -120,6 +121,7 @@ Install `nvm` to install NodeJS:
     nvm alias default v18
 
 ### Install Go
+
 https://github.com/briangershon/setup-go
 
 ## Additional Configuration
