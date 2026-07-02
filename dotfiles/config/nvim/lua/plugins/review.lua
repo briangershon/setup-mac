@@ -24,23 +24,45 @@ end
 
 local function open_review()
 	local base = get_review_base()
-	vim.cmd("DiffviewOpen " .. base .. "...HEAD")
 	local merge_base = vim.fn.system("git merge-base HEAD " .. base):gsub("%s+$", "")
-	if vim.v.shell_error == 0 and merge_base ~= "" then
-		require("gitsigns").change_base(merge_base, true)
-	else
+	if vim.v.shell_error ~= 0 or merge_base == "" then
 		vim.notify("Could not find merge base with " .. base, vim.log.levels.WARN)
+		return
+	end
+
+	require("gitsigns").change_base(merge_base, true)
+
+	local toplevel = vim.fn.system("git rev-parse --show-toplevel"):gsub("%s+$", "")
+	local files_raw = vim.fn.system("git diff --name-only " .. merge_base .. " HEAD")
+	if vim.v.shell_error ~= 0 then
+		vim.notify("Could not list changed files against " .. base, vim.log.levels.WARN)
+		return
+	end
+
+	local files = {}
+	for file in files_raw:gmatch("[^\r\n]+") do
+		table.insert(files, toplevel .. "/" .. file)
+	end
+
+	if #files == 0 then
+		vim.notify("No changed files against " .. base, vim.log.levels.INFO)
+		return
+	end
+
+	for i, file in ipairs(files) do
+		if i == 1 then
+			vim.cmd.edit(file)
+		else
+			vim.fn.bufadd(file)
+		end
 	end
 end
 
 vim.api.nvim_create_user_command("ReviewOpen", open_review, {
-	desc = "Open PR review diff against detected base branch",
+	desc = "Open changed files as buffers against detected base branch",
 })
 
--- Diffview open/close/return
-vim.keymap.set("n", "<leader>ro", open_review, { desc = "Review: open diffview" })
-vim.keymap.set("n", "<leader>rc", "<cmd>DiffviewClose<cr>", { desc = "Review: close diffview" })
-vim.keymap.set("n", "<leader>rv", open_review, { desc = "Review: return to diffview" })
+vim.keymap.set("n", "<leader>ro", open_review, { desc = "Review: open changed files as buffers" })
 
 -- Git hunk navigation (gitsigns)
 vim.keymap.set("n", "<leader>rn", function()

@@ -1,4 +1,5 @@
 require("gitsigns").setup({
+	linehl = true,
 	signs = {
 		add = { text = "+" },
 		change = { text = "~" },
@@ -44,6 +45,13 @@ require("gitsigns").setup({
 		map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Select hunk")
 	end,
 })
+
+-- nord.nvim defines GitSigns*Ln highlights with fg only (no background),
+-- which shadows gitsigns' own fallback to DiffAdd/DiffChange/DiffDelete and
+-- makes `linehl` invisible. Link them to the Diff groups so linehl shows up.
+vim.api.nvim_set_hl(0, "GitSignsAddLn", { link = "DiffAdd" })
+vim.api.nvim_set_hl(0, "GitSignsChangeLn", { link = "DiffChange" })
+vim.api.nvim_set_hl(0, "GitSignsDeleteLn", { link = "DiffDelete" })
 
 vim.api.nvim_create_user_command("GitSignsMergeBase", function()
 	-- Try local symref first (fast, no network)
