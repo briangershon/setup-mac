@@ -84,6 +84,21 @@ do
       --
       -- When you move your cursor, the highlights will be cleared (the second autocommand).
       local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+      -- Ruff and basedpyright both attach to Python buffers. Ruff's hover only
+      -- repeats rule documentation, so let basedpyright own hover rather than
+      -- stacking two popups, and give ruff's own code actions direct keymaps.
+      if client and client.name == 'ruff' then
+        client.server_capabilities.hoverProvider = false
+
+        local ruff_action = function(kind)
+          return function() vim.lsp.buf.code_action { context = { only = { kind }, diagnostics = {} }, apply = true } end
+        end
+
+        map('<leader>co', ruff_action 'source.organizeImports.ruff', '[C]ode [O]rganize Imports')
+        map('<leader>cF', ruff_action 'source.fixAll.ruff', '[C]ode [F]ix All')
+      end
+
       if client and client:supports_method('textDocument/documentHighlight', event.buf) then
         local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
         vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -236,4 +251,10 @@ do
     vim.lsp.config(name, server)
     vim.lsp.enable(name)
   end
+
+  -- Python tools resolve their binaries from the project's own .venv, so they're
+  -- configured in `after/lsp/` and enabled here instead of via the `servers`
+  -- table above — that table also feeds Mason's ensure_installed list, and a
+  -- Mason-installed ruff would shadow whatever version a project pins.
+  vim.lsp.enable { 'basedpyright', 'ruff' }
 end
