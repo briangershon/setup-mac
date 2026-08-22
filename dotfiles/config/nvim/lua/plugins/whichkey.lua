@@ -4,5 +4,5 @@ wk.setup({})
 
 wk.add({
 	{ "<leader>c", group = "code" },
-	{ "<leader>r", group = "review" },
+	{ "<leader>x", group = "trouble" },
 })

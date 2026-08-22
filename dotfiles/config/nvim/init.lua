@@ -40,5 +40,4 @@ require("plugins.conform")
 require("plugins.gitsigns")
 require("plugins.trouble")
 require("plugins.whichkey")
-require("plugins.review")
 

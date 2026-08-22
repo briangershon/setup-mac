@@ -99,6 +99,82 @@ The Python config lives in `after/lsp/basedpyright.lua` and `after/lsp/ruff.lua`
 nvim-lspconfig comes after `~/.config/nvim`. From `lsp/` the custom `cmd` would be silently
 replaced by lspconfig's plain `{ 'ruff', 'server' }`.
 
+# Example scenarios
+
+## Jump around with LSP, then get back
+
+| Key | Action |
+| --- | --- |
+| `gd` | Go to definition |
+| `gD` | Go to declaration |
+| `grr` | Find references (built-in default) |
+| `gri` | Go to implementation (built-in default) |
+| `grt` | Go to type definition (built-in default) |
+| `grn` | Rename across files (built-in default) |
+| `gra` | Code action (built-in default) |
+| `gO` | Document symbols (built-in default) |
+| `K` | Hover |
+| `<C-o>` | Jump back to where you came from |
+| `<C-i>` | Jump forward again |
+
+Only `gd`/`gD` are custom (`lua/plugins/lsp.lua`) — everything else is a Neovim
+0.12 built-in (`:h lsp-defaults`), so it works with zero config.
+
+Example: cursor on a function call, `gd` to jump to its definition in another
+file, `gd` again on something it calls, then `<C-o>` `<C-o>` to retrace both
+jumps back to where you started. Every `gd`/`gr*` jump lands in the jumplist,
+so `<C-o>`/`<C-i>` walk back and forth through the whole chase, not just one hop.
+
+## Using Trouble
+
+Trouble (`lua/plugins/trouble.lua`) opens a fixed list of results you can page
+through, instead of a floating popup.
+
+| Key | Opens |
+| --- | --- |
+| `<leader>xx` | Diagnostics, whole workspace |
+| `<leader>xX` | Diagnostics, current buffer only |
+| `<leader>cs` | Document symbols |
+| `<leader>cl` | Definitions / references / implementations, combined |
+| `<leader>xL` | Location list |
+| `<leader>xQ` | Quickfix list |
+
+Inside the Trouble window:
+
+| Key | Action |
+| --- | --- |
+| `j` / `k` | Move down / up the list |
+| `<cr>` | Jump to the item under the cursor |
+| `o` | Jump to the item and close Trouble |
+| `p` / `P` | Preview / toggle preview |
+| `r` | Refresh |
+| `q` | Close |
+
+Example: cursor on a function, `<leader>cl` to see every place it's defined,
+referenced, and implemented in one scrollable list, `j`/`k` to browse them,
+`<cr>` to jump to the one you want.
+
+## Reviewing all the changes on a branch
+
+`<leader>gr` (or `:ReviewOpen`) detects the branch's base — `origin/staging` →
+`origin/main` → `origin/master`, falling back to the local equivalents — sets
+that as gitsigns' diff base, and opens every file changed since the merge-base
+as a real buffer, ready to page through.
+
+| Key | Action |
+| --- | --- |
+| `<leader>gr` | Open every changed file vs. the detected base branch |
+| `<Tab>` / `<S-Tab>` | Next / previous open buffer |
+| `]h` / `[h` | Next / previous changed hunk in the current file |
+| `<leader>hp` | Preview a hunk without leaving your cursor line |
+| `<leader>hb` | Blame the current line |
+| `<leader>hd` | Diff the current file against the base |
+| `<leader>hs` / `<leader>hr` | Stage / reset a hunk |
+
+If you just want gitsigns' inline `+`/`~`/`_` markers re-based against the
+branch's base — without opening every changed file — run `:GitSignsMergeBase`
+on its own.
+
 # Resources
 
 - <https://github.com/hendrikmi/dotfiles> and YouTube videos.

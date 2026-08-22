@@ -1,3 +1,33 @@
+local function git_ref_exists(ref)
+	vim.fn.system("git rev-parse --verify " .. ref .. " 2>/dev/null")
+	return vim.v.shell_error == 0
+end
+
+local function get_review_base()
+	local candidates = {
+		"origin/staging",
+		"origin/main",
+		"origin/master",
+		"staging",
+		"main",
+		"master",
+	}
+	for _, ref in ipairs(candidates) do
+		if git_ref_exists(ref) then
+			return ref
+		end
+	end
+	return "origin/main"
+end
+
+local function get_merge_base(base)
+	local merge_base = vim.fn.system("git merge-base HEAD " .. base):gsub("%s+$", "")
+	if vim.v.shell_error ~= 0 or merge_base == "" then
+		return nil
+	end
+	return merge_base
+end
+
 require("gitsigns").setup({
 	linehl = true,
 	signs = {
@@ -54,25 +84,53 @@ vim.api.nvim_set_hl(0, "GitSignsChangeLn", { link = "DiffChange" })
 vim.api.nvim_set_hl(0, "GitSignsDeleteLn", { link = "DiffDelete" })
 
 vim.api.nvim_create_user_command("GitSignsMergeBase", function()
-	-- Try local symref first (fast, no network)
-	local remote_head = vim.fn.system("git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null"):gsub("%s+$", "")
-	local base_ref
-	if vim.v.shell_error == 0 and remote_head ~= "" then
-		base_ref = remote_head:gsub("^refs/remotes/", "")
-	else
-		-- Fall back to asking the remote (network call)
-		local branch = vim.fn.system("git remote show origin 2>/dev/null | grep 'HEAD branch' | awk '{print $NF}'"):gsub("%s+$", "")
-		if vim.v.shell_error ~= 0 or branch == "" then
-			vim.notify("Could not determine origin's default branch", vim.log.levels.ERROR)
-			return
-		end
-		base_ref = "origin/" .. branch
-	end
-
-	local base = vim.fn.system("git merge-base HEAD " .. base_ref):gsub("%s+$", "")
-	if vim.v.shell_error ~= 0 or base == "" then
-		vim.notify("Could not find merge base with " .. base_ref, vim.log.levels.ERROR)
+	local review_base = get_review_base()
+	local merge_base = get_merge_base(review_base)
+	if not merge_base then
+		vim.notify("Could not find merge base with " .. review_base, vim.log.levels.ERROR)
 		return
 	end
-	vim.cmd("Gitsigns change_base " .. base)
+	vim.cmd("Gitsigns change_base " .. merge_base)
 end, {})
+
+local function open_review()
+	local review_base = get_review_base()
+	local merge_base = get_merge_base(review_base)
+	if not merge_base then
+		vim.notify("Could not find merge base with " .. review_base, vim.log.levels.WARN)
+		return
+	end
+
+	require("gitsigns").change_base(merge_base, true)
+
+	local toplevel = vim.fn.system("git rev-parse --show-toplevel"):gsub("%s+$", "")
+	local files_raw = vim.fn.system("git diff --name-only " .. merge_base .. " HEAD")
+	if vim.v.shell_error ~= 0 then
+		vim.notify("Could not list changed files against " .. review_base, vim.log.levels.WARN)
+		return
+	end
+
+	local files = {}
+	for file in files_raw:gmatch("[^\r\n]+") do
+		table.insert(files, toplevel .. "/" .. file)
+	end
+
+	if #files == 0 then
+		vim.notify("No changed files against " .. review_base, vim.log.levels.INFO)
+		return
+	end
+
+	for i, file in ipairs(files) do
+		if i == 1 then
+			vim.cmd.edit(file)
+		else
+			vim.fn.bufadd(file)
+		end
+	end
+end
+
+vim.api.nvim_create_user_command("ReviewOpen", open_review, {
+	desc = "Open changed files as buffers against detected base branch",
+})
+
+vim.keymap.set("n", "<leader>gr", open_review, { desc = "Git: Review - open changed files vs base branch" })
