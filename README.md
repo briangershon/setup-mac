@@ -88,6 +88,16 @@ fzf adds Ctrl-R history search, Ctrl-T file selection, and Alt-C directory selec
 
 ### tmux
 
+Run `t` (no arguments) to create or attach to a session named after the Git
+repository's root folder, or the current folder outside Git. New sessions start
+in the directory where you run `t`, with three windows ordered `agent`, `edit`, and `git`,
+initially focused on `agent`. Attaching to an existing session keeps its windows.
+Periods and colons in names become underscores;
+`/` uses `root`. Folders with the same derived name share a session, and changing
+directories does not rename it. The regular `tmux` command is unchanged.
+
+Open a new shell or run `source ~/.bash_profile` to load the shortcut.
+
 Also for `tmux` change MacOS keyboard shortcut so that CAPS LOCK maps to CTRL in "System Preferences > Keyboard" then "Modifier Keys..." button. This gives you the very nice `CAPSLOCK-a` (already setup in `.tmux.conf` instead of default `CTRL-b`.
 
 ### Editors

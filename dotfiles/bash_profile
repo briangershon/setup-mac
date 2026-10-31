@@ -3,6 +3,29 @@ export EDITOR=nvim
 export VISUAL=nvim
 alias s="git status"
 
+# Create or attach to a tmux session for this project.
+t() {
+  if [[ $# -ne 0 ]]; then
+    printf 'Usage: t (no arguments)\n' >&2
+    return 2
+  fi
+
+  local directory name
+  directory=$(git rev-parse --show-toplevel 2>/dev/null) || directory=$PWD
+  name=${directory##*/}
+  name=${name//./_}
+  name=${name//:/_}
+  name=${name:-root}
+
+  if ! command tmux has-session -t "=$name" 2>/dev/null; then
+    command tmux new-session -d -s "$name" -n agent -c "$PWD" \; \
+      new-window -d -t "=$name:" -n edit -c "$PWD" \; \
+      new-window -d -t "=$name:" -n git -c "$PWD" || return
+  fi
+
+  command tmux attach-session -t "=$name"
+}
+
 if [[ $- == *i* ]]; then
   # Append on exit and ignore consecutive duplicate commands.
   shopt -s histappend
