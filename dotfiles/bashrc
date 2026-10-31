@@ -1,0 +1,4 @@
+# Keep interactive login and non-login shell settings in one place.
+if [[ $- == *i* && -r "$HOME/.bash_profile" ]]; then
+  . "$HOME/.bash_profile"
+fi

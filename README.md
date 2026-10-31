@@ -33,7 +33,7 @@ If homebrew needs to be accessible for multiple user accounts on same machine: <
 Install apps via Homebrew:
 
 ```bash
-brew install tmux git bash-completion gh gpg git-lfs starship hx neovim
+brew install tmux git bash-completion gh gpg git-lfs fzf neovim
 ```
 
 ### Shell and Terminal
@@ -72,12 +72,19 @@ Clone this repo locally via `git clone git@github.com:briangershon/setup-mac.git
     cd ~
     ln -s ~/setup-mac/dotfiles/gitconfig .gitconfig
     ln -s ~/setup-mac/dotfiles/bash_profile .bash_profile
+    ln -s ~/setup-mac/dotfiles/bashrc .bashrc
     ln -s ~/setup-mac/dotfiles/tmux.conf .tmux.conf
-    ln -s ~/setup-mac/dotfiles/config/helix .config/helix
     ln -s ~/setup-mac/dotfiles/config/nvim .config/nvim
-    ln -s ~/setup-mac/dotfiles/config/starship .config/starship
 
     rm ~/.profile
+
+All Bash settings live in `dotfiles/bash_profile`. The `.bashrc` loader also loads
+them for interactive non-login shells, such as a nested `bash` session.
+
+`EDITOR` and `VISUAL` default to `nvim`. Interactive shells keep 50,000 history
+commands in memory and up to 100,000 lines on disk, skip consecutive duplicates,
+and append history on exit. Open terminals keep independent active histories.
+fzf adds Ctrl-R history search, Ctrl-T file selection, and Alt-C directory selection.
 
 ### tmux
 
@@ -91,10 +98,6 @@ Also for `tmux` change MacOS keyboard shortcut so that CAPS LOCK maps to CTRL in
 - To support TypeScript LSP options: `npm i -g typescript typescript-language-server`
 - Install NeoVim
 - NeoVim keymaps: `gd`/`gD` jump to definition/declaration (see `dotfiles/config/nvim/lua/plugins/lsp.lua`); `<leader>x` brings up the which-key popup for Trouble (diagnostics, symbols, references, quickfix/loclist — see `dotfiles/config/nvim/lua/plugins/trouble.lua`); `<leader>gr` opens changed files against the detected base branch (see `dotfiles/config/nvim/lua/plugins/gitsigns.lua`).
-
-Other:
-
-- Helix is interesting too. Common features built-in and intentionally no plug-in system. Why Helix? <https://phaazon.net/blog/more-hindsight-vim-helix-kakoune>
 
 ### Setup Git
 

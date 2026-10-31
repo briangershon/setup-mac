@@ -1,17 +1,46 @@
 export BASH_SILENCE_DEPRECATION_WARNING=1
+export EDITOR=nvim
+export VISUAL=nvim
 alias s="git status"
 
-[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+if [[ $- == *i* ]]; then
+  # Append on exit and ignore consecutive duplicate commands.
+  shopt -s histappend
+  HISTSIZE=50000
+  HISTFILESIZE=100000
+  HISTCONTROL=ignoredups
+fi
 
-export PATH=$PATH:/usr/local/bin/github
+markdown_newline() {
+  sed 's/\\n/\n/g'
+}
 
-# Set PATH, MANPATH, etc., for Homebrew.
+# Simple Nord prompt: blue working directory and a green prompt character.
+PROMPT_DIRTRIM=3
+PS1='\[\e[1;38;2;94;129;172m\]\w\[\e[0m\] \[\e[38;2;163;190;140m\]>\[\e[0m\] '
+
+# Toolchain and PATH setup. Initialize Homebrew before language managers.
 eval "$(/opt/homebrew/bin/brew shellenv)"
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+[[ -r "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-. "$HOME/.cargo/env"
-export PATH="$PATH:/Users/brian/.local/bin"
-export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
-eval "$(starship init bash)"
+[[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh"
+[[ -s "$NVM_DIR/bash_completion" ]] && . "$NVM_DIR/bash_completion"
+
+if [[ $- == *i* ]] && command -v fzf >/dev/null 2>&1; then
+  eval "$(fzf --bash)"
+fi
+
+# Append existing directories once.
+_setup_mac_path() {
+  [[ -d "$1" ]] || return 0
+  case ":$PATH:" in
+    *:"$1":*) return 0 ;;
+  esac
+  export PATH="${PATH:+$PATH:}$1"
+}
+
+_setup_mac_path "$HOME/.docker/bin"
+_setup_mac_path "$HOME/.local/bin"
+unset -f _setup_mac_path
