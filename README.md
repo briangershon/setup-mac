@@ -8,7 +8,7 @@ Update Computer name via `System Preferences > Sharing`.
 
 Install Desktop apps:
 
-- Install 1Password
+- Install 1Password (also install the CLI under Developer Tools below)
 - Install Brave Browser and setup various profiles
 - Dropbox
 - Discord
@@ -52,7 +52,19 @@ type mapfile     # should show "mapfile is a shell builtin"
 
 3. Install ghostty terminal.
 
-### 1Password SSH agent
+### 1Password CLI and SSH agent
+
+Install the [1Password CLI](https://developer.1password.com/docs/cli/get-started/)
+so we can save environment variable secrets in 1Password and retrieve them from the shell:
+
+```bash
+brew install --cask 1password-cli
+op --version
+```
+
+In the 1Password app, enable **Settings > Developer > Integrate with 1Password CLI**.
+
+#### SSH agent
 
 Create a symlink to the 1Password SSH agent socket:
 
