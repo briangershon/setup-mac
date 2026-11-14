@@ -139,10 +139,7 @@ Also for `tmux` change MacOS keyboard shortcut so that CAPS LOCK maps to CTRL in
 Setup passwordless Auth to Github via SSH
 
 ```bash
-ssh-keygen -t ed25519 -C "<desired email address here>"
-
-# legacy version
-ssh-keygen -t rsa -b 4096 -C "<desired email address here>"
+ssh-keygen -t ed25519 -C "descriptive comment"
 
  # add public key to Github
 ```
