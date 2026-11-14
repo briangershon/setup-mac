@@ -52,6 +52,19 @@ type mapfile     # should show "mapfile is a shell builtin"
 
 3. Install ghostty terminal.
 
+### 1Password SSH agent
+
+Create a symlink to the 1Password SSH agent socket:
+
+```bash
+mkdir -p ~/.1password
+ln -s ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.1password/agent.sock
+```
+
+The Bash startup configuration sets `SSH_AUTH_SOCK` to `~/.1password/agent.sock`.
+After linking the dotfiles below, open a new shell or run `source ~/.bash_profile`
+to load the variable.
+
 ### Docker
 
 Install Docker Desktop.

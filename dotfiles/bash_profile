@@ -1,6 +1,7 @@
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export EDITOR=nvim
 export VISUAL=nvim
+export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
 alias s="git status"
 
 # Create or attach to a tmux session for this project.
